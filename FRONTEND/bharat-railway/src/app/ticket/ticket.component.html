@@ -1,0 +1,216 @@
+<div class="container">
+
+  <!-- <form class="d-flex mt-3" #searchForm="ngForm">
+    <input class="form-control" type="text" placeholder="Search your PNR" aria-label="Search" name="pnr" #name="ngModel" [(ngModel)]="selectedsearchModel.pnr">
+    <button class="btn btn-outline-success" (click)="getTicket()" type="button">Search</button>
+  </form> -->
+  <form class="d-flex mt-3" #searchForm="ngForm">
+    <input class="form-control" type="search" placeholder="Search your PNR to delete booking" aria-label="Search"
+      name="pnr" #name="ngModel" [(ngModel)]="selectedsearchModel.pnr">
+    <button class="btn btn-outline-success" (click)="findTicket()" type="button">Search</button>
+  </form>
+
+  
+  <div class="container pt-3" [class.d-none]="disableDisplay"> 
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>PNR</th>
+        <th>Number of Tickets</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{tickets.pname}} </td>
+        <td>{{tickets.age}} </td>
+        <td>{{tickets.gender}} </td>
+        <td>{{tickets.pnr}} </td> 
+        <td>{{tickets.noTickets}}</td> 
+  <!-- <td *ngFor="let col of index">{{ticket[col]}}</td> -->
+
+   <td><span> <button class="btn btn-sm btn-danger" type="button" (click)="onDelete()">
+          <i class="fa fa-remove"></i>Delete</button></span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <h3 class="mt-3 alert alert-success mb-3">Search Trains</h3>
+  <form class="conatiner border" #form="ngForm">
+
+    <div class="row g-3">
+      <div class="col">
+        <span class="input-group-text" id="basic-addon1">From</span>
+        <input type="text" class="form-control" placeholder="Where from?" #from="ngModel"
+          [class.is-invalid]="from.invalid && from.touched" name="from" aria-label="From"
+          aria-describedby="basic-addon1" [(ngModel)]="userdata.from" required>
+        <small class="text-danger" [class.d-none]="from.valid || from.untouched">Source is required</small>
+      </div>
+
+      <div class="col">
+        <span class="input-group-text" id="basic-addon2">To</span>
+        <input type="text" class="form-control" placeholder="Where to?" #to="ngModel"
+          [class.is-invalid]="to.invalid && to.touched" aria-label="To" name="to" aria-describedby="basic-addon2"
+          [(ngModel)]="userdata.to" required>
+        <small class="text-danger" [class.d-none]="to.valid || to.untouched">Destination is required</small>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="row g-3">
+      <div class="col">
+        <span class="input-group-text" id="basic-addon3">When</span>
+        <input type="date" class="form-control" placeholder="" aria-label="when" #date="ngModel"
+          [class.is-invalid]="date.invalid && date.touched" name="date" aria-describedby="basic-addon3"
+          [(ngModel)]="userdata.date" [min]="minDate1" required>
+          <small class="text-danger" [class.d-none]="date.valid || date.untouched">Date is required</small>
+      </div>
+
+      <div class="col">
+        <span class="input-group-text" id="basic-addon3">Quota</span>
+        <select class="custom-select" #quota="ngModel" name="quota" placeholder="Quota" [(ngModel)]="userdata.quota">
+          <option value="General" selected>General</option>
+          <option value="Ladies">Ladies</option>
+          <option value="Handicapped">Handicapped</option>
+        </select>
+      </div>
+    </div>
+    <br>
+
+    <button type="submit" class="btn btn-primary form-control" [disabled]="form.form.invalid" (click)="findTrain()">Find
+      Trains</button>
+
+  </form>
+
+  <h3 class="text-center mt-4 alert alert-success">Available Trains </h3>
+
+  <table class="table container table-hover table-bordered" [class.d-none]="disableDisplays">
+    <thead>
+      <tr>
+        <th scope="col">Train Number</th>
+        <th scope="col">Train Name</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Distance(km)</th>
+        <th scope="col">Fare(INR)</th>
+        <th scope="col">Arrival</th>
+        <th scope="col">Departure</th>
+        <th scope="col">Book</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of train">
+        <td *ngFor="let col of index">{{data[col]}}</td>
+        <!-- <td><button (click)="postData()" ><i class="fas fa-edit ps-3"></i></button>  <button (click)="postData()"><i class="fas fa-trash-alt ps-3"></i></button></td> -->
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="open(content)" (click)="assign(data)">
+            <i class="fas fa-ticket-alt"></i>Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title2">Book Ticket</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <!-- <th scope="col">Train Number</th> -->
+            <th scope="col">Train Name</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Departure</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Fare</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- <td>{{trainResult.trainNum}}</td> -->
+            <td>{{trainResult.name}}</td>
+            <td>{{trainResult.from}}</td>
+            <td>{{trainResult.to}}</td>
+            <td>{{trainResult.departure}}</td>
+            <td>{{trainResult.arrival}}</td>
+            <td>{{trainResult.fare}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form #userForm="ngForm" >
+        <!-- (ngSubmit)="onSubmit(userForm) -->
+
+        <div class="row">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Full name</label>
+            <input type="text" class="form-control" id="name" #name="ngModel" name="pname" placeholder="Full name"
+              value="Name" [(ngModel)]="userModel.pname" >
+              <!-- <small class="text-danger" [class.d-none]="pname.valid || pname.untouched">Name is required</small> -->
+          </div>
+
+          <div class="col-md-6">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" #name="ngModel" name="age" placeholder="Age" value="Age"
+              [(ngModel)]="userModel.age">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <label for="gender">Gender</label>
+            <select class="form-select" #name="ngModel" name="gender" id="gender" [(ngModel)]="userModel.gender">
+              <!-- <option selected>Open this select menu</option> -->
+              <option value="Male" selected>Male</option>
+              <option value="Female">Female</option>
+              <option value="Transgender">Transgender</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="no">Number of seats</label>
+            <select class="form-select" id="no" name="noTickets" #name="ngModel" [(ngModel)]="userModel.noTickets">
+              <!-- <option selected>Open this select menu</option>  -->
+              <option value="1" selected>One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+              <option value="4">Four</option>
+              <option value="5">Five</option>
+              <option value="6">six</option>
+            </select>
+          </div>
+        </div>
+        <br>
+
+        <div class="modal-footer  ">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit()" type="submit">Submit</button>
+        </div>
+        <!-- (click)="initpay()" -->
+
+      </form>
+
+    </div>
+
+
+  </ng-template>
+
+</div>
+<!-- 
+  <small class="text-danger" [class.d-none]="noTickets.valid || noTickets.untouched">Date is required</small>
+<small class="text-danger" [class.d-none]="gender.valid || gender.untouched">Date is required</small>
+ <small class="text-danger" [class.d-none]="age.valid || age.untouched">Date is required</small>
+               <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+ -->

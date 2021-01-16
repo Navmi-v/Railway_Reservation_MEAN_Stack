@@ -1,0 +1,259 @@
+<!-- <button class="btn btn-primary" type="button" (click)="getAll()">Get all Trains</button> -->
+
+
+<br>
+<div class="border container mt-2">
+  <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+    <i class="fa fa-train"></i>New train</button>
+</div>
+
+
+<table class="table container table-hover table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Train Number</th>
+      <th scope="col">Train Name</th>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col">Distance (km)</th>
+      <th scope="col">Fare (INR)</th>
+      <th scope="col">Arrival</th>
+      <th scope="col">Departure</th>
+      <th scope='col'>Edit/Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of train">
+      <td *ngFor="let col of index">{{data[col]}}</td>
+      <!-- <td><button (click)="postData()" ><i class="fas fa-edit ps-3"></i></button>  <button (click)="postData()"><i class="fas fa-trash-alt ps-3"></i></button></td> -->
+      <td>
+        <button class="btn btn-sm btn-warning" (click)="openEdit(contentEdit, train)">
+          <i class="fa fa-edit"></i>Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, train)">
+          <i class="fa fa-remove"></i>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title2">Edit Train</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form #trainForm="ngForm" ngNativeValidate>
+      <div class="row g-3">
+        <div class="col">
+          <input type="Number" class="form-control" placeholder="Train Number" aria-label="Train Number" name="number"
+            [(ngModel)]="trainsData.number" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Train Name" aria-label="Train Name" name="name"
+            [(ngModel)]="trainsData.name" required>
+        </div>
+      </div>
+      <br>
+
+      <div class="row g-3">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Source" aria-label="Source" name="from"
+            [(ngModel)]="trainsData.from" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Destination" aria-label="Destination" name="to"
+            [(ngModel)]="trainsData.to" required>
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row g-3">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Distance" aria-label="Distance" name="distance"
+            [(ngModel)]="trainsData.distance" required>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Fare" aria-label="Fare" name="fare"
+            [(ngModel)]="trainsData.fare" required>
+        </div>
+      </div>
+      <br>
+
+      <div class="row g-3">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Arrival" aria-label="Arrival" name="arrival"
+            [(ngModel)]="trainsData.arrival" required>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Departure" aria-label="Departure" name="departure"
+            [(ngModel)]="trainsData.departure" required>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="postData()" (click)="modal.close('Save click')">Save</button>
+  </div>
+
+</ng-template>
+
+<!-- Edit Train -->
+ <ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Train</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm" novalidate>
+      <div class="row g-3">
+        <div class="col form-group">
+          <input type="Number" class="form-control" placeholder="Train Number" aria-label="Train Number" name="number"
+            formControlName="number" required>
+        </div>
+        <div class="col form-group">
+          <input type="text" class="form-control" placeholder="Train Name" aria-label="Train Name" name="name"
+            formControlName="name" required>
+        </div>
+      </div>
+      <br>
+
+      <div class="row g-3">
+        <div class="col form-group">
+          <input type="text" class="form-control" placeholder="Source" aria-label="Source" name="from"
+            formControlName="from" required>
+        </div>
+        <div class="col form-group">
+          <input type="text" class="form-control" placeholder="Destination" aria-label="Destination" name="to"
+            formControlName="to" required>
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row g-3">
+        <div class="col form-group">
+          <input type="number" class="form-control" placeholder="Distance" aria-label="Distance" name="distance"
+            formControlName="distance" required>
+        </div>
+        <div class="col form-group">
+          <input type="number" class="form-control" placeholder="Fare" aria-label="Fare" name="fare"
+            formControlName="fare" required>
+        </div>
+      </div>
+      <br>
+
+      <div class="row g-3">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Arrival" aria-label="Arrival" name="arrival"
+          formControlName="arrival" required>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Departure" aria-label="Departure" name="departure"
+          formControlName="departure" required>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onUpdate()">Save</button>
+  </div>
+
+</ng-template> 
+
+<!-- <ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Train</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm" novalidate>
+      <div class="row g-3">
+        <div class="col form-group">
+          <input type="Number" class="form-control" placeholder="Train Number" aria-label="Train Number" name="number"
+          #number="ngModel" [(ngModel)]="userdata.number" required>
+        </div>
+        <div class="col form-group">
+          <input type="text" class="form-control" placeholder="Train Name" aria-label="Train Name" name="name"
+          #name="ngModel" [(ngModel)]="userdata.name" required>
+        </div>
+      </div>
+      <br>
+
+      <div class="row g-3">
+        <div class="col form-group">
+          <input type="text" class="form-control" placeholder="Source" aria-label="Source" name="from"
+          #from="ngModel" [(ngModel)]="userdata.from" required>
+        </div>
+        <div class="col form-group">
+          <input type="text" class="form-control" placeholder="Destination" aria-label="Destination" name="to" #from="ngModel"
+          [(ngModel)]="userdata.to" required>
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row g-3">
+        <div class="col form-group">
+          <input type="number" class="form-control" placeholder="Distance" aria-label="Distance" name="distance"
+          #distance="ngModel" [(ngModel)]="userdata.distance" required>
+        </div>
+        <div class="col form-group">
+          <input type="number" class="form-control" placeholder="Fare" aria-label="Fare" name="fare"
+          #fare="ngModel" [(ngModel)]="userdata.fare" required>
+        </div>
+      </div>
+      <br>
+
+      <div class="row g-3">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Arrival" aria-label="Arrival" name="arrival"
+          formControlName="arrival" required>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Departure" aria-label="Departure" name="departure"
+          formControlName="departure" required>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onUpdate()">Save</button>
+  </div>
+
+</ng-template> -->
+
+<!-- delete train -->
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+
+
+
+

@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><i class="fas fa-train">Bharat Railways</i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home" routerLinkActive="active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/admin" routerLinkActive="active" aria-current="page"
+            href="#">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/ticket" routerLinkActive="active" aria-current="page"
+            href="#">Ticket</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/about" routerLinkActive="active" aria-current="page"
+            href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/contact" routerLinkActive="active" aria-current="page"
+            href="#">Contact</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link active" *ngIf="!registerService.loggedIn()" routerLink="/register" aria-current="page"
+            href="#"><i class="fas fa-user-plus"></i>Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" *ngIf="!registerService.loggedIn()" routerLink="/login" aria-current="page"
+            href="#"><i class="fas fa-sign-in-alt"></i>Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" *ngIf="!adminAuthService.loggedIn()" routerLink="/Adminlogin" aria-current="page"
+            href="#"><i class="fas fa-sign-in-alt"></i>Admin Login</a>
+        </li>
+
+
+        <!-- <li class="nav-item">
+      <a class="nav-link active" style="cursor:pointer" *ngIf="adminAuthService.loggedIn()" routerLink="/home" aria-current="page"  href="#"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </li> -->
+        <li class="nav-item">
+          <a class="nav-link active" style="cursor:pointer" *ngIf="registerService.loggedIn()" routerLink="/home"
+            aria-current="page" (click)="adminAuthService.logout()" href="#"><i
+              class="fas fa-sign-out-alt"></i>Logout</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<router-outlet></router-outlet>
+
+
+<footer class="text-center  pt-3">
+  <p>Bharat Railways &copy; 2020 <a href="https://www.facebook.com/"><i class="fab fa-facebook ps-3"></i></a> 
+    <a href="https://twitter.com/"><i class="fab fa-twitter ps-3"></i></a> </p>
+</footer>
+
+
+<!-- *ngIf="!adminAuthService.loggedInAdmin()"
+  *ngIf="!registerService.loggedIn()"
+  *ngIf="adminAuthService.loggedInAdmin()"
+  *ngIf="registerService.loggedIn()"
+
+ -->

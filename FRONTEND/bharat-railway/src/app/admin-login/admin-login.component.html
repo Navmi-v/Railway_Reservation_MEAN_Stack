@@ -1,0 +1,34 @@
+<!-- <p>login works!</p> -->
+<div class="row pt-5">
+  <div class="col-md-6 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Admin Login</h3>
+      </div>
+      <div class="card-body">
+
+        <form class="form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" [(ngModel)]="loginAdminData.email" name="email" class="form-control rounded-0" required>
+
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" [(ngModel)]="loginAdminData.password" name="password" class="form-control rounded-0"
+              required>
+
+          </div>
+          <small class="text-danger" *ngIf="isLoginError">{{errorMsg1}}</small>
+          <br>
+
+
+          <button (click)="loginAdmin()" class="btn btn-success">Login</button>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

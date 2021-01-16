@@ -1,0 +1,129 @@
+<div class="conatiner-fluid">
+  <div class="alert alert-warning alert-dismissible alert-warning fade show" role="alert">
+    All passengers are hereby informed that downloading of Aarogya Setu App on their mobile phone, that they are
+    carrying along, is advisable.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div class="bg-image">
+    <div class="card border" style="width: 18rem; height: 25rem; top: 5rem; left: 5rem">
+      <div class="card-body">
+        <h5 class="card-title text-center">BOOK</h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center pb-1">your ticket</h6>
+        <i class="fas fa-train fa-2x center image-align"></i><br>
+        <p class="card-text"></p>
+
+
+        <form class="conatiner-fluid" #form="ngForm">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">From</span>
+            <input type="text" class="form-control" placeholder="Where from?" #from="ngModel"
+              [class.is-invalid]="from.invalid && from.touched" name="from" aria-label="From"
+              aria-describedby="basic-addon1" [(ngModel)]="userdata.from" required>
+            <small class="text-danger" [class.d-none]="from.valid || from.untouched">Required</small>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">To</span>
+            <input type="text" class="form-control" placeholder="Where to?" #to="ngModel"
+              [class.is-invalid]="to.invalid && to.touched" aria-label="To" name="to" aria-describedby="basic-addon2"
+              [(ngModel)]="userdata.to" required>
+              <small class="text-danger" [class.d-none]="to.valid || to.untouched">Required</small>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">When</span>
+            <input type="date" class="form-control" placeholder="" aria-label="when" #date="ngModel"
+              [class.is-invalid]="date.invalid && date.touched" name="date" aria-describedby="basic-addon3"
+              [(ngModel)]="userdata.date" [min]="minDate1"  required>
+
+          </div>
+
+          <div class="input-group mb-3">
+            <select class="custom-select" #quota="ngModel" name="quota" placeholder="Quota" [(ngModel)]="userdata.quota">
+              <option value="General" selected>General</option>
+              <option value="Ladies">Ladies</option>
+              <option value="Handicapped">Handicapped</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-control" [disabled]="form.form.invalid" (click)="findTrain()">Find Trains</button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <span class="badge bg-dark position-absolute top-50 start-50 translate-middle">
+      <h1>Bharat Railways</h1>
+      <h5>Safety | Security | Punctuality</h5>
+    </span>
+  </div>
+
+  <h2 class="text-center space">Offers and Services</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 extra-margin">
+    <div class="col">
+      <div class="card">
+        <img src="../../assets/food-irctc.jpg" class="card-img-top container-image" alt="food available on train">
+        <div class="card-body">
+          <h5 class="card-title">Scrumptious Food</h5>
+          <p class="card-text">We understand the diversity of choices in today's world. We offer a variety of food
+            options ranging from vegan to non-veg. Our meal is prepared with fresh vegetables and fruits and top quality
+            products because we value your health.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="../../assets/Shelf of Books.jpg" class="card-img-top container-image" alt="Books and magazine">
+        <div class="card-body">
+          <h5 class="card-title">Books and Magazine</h5>
+          <p class="card-text">We value your time, and we understand that it's not easy to travel long distances, so we
+            have arranged for the best friends you can ever find. We have arranged for a variety of books in distinct
+            languages for borrowing while traveling.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="../../assets/railwaire.jpg" class="card-img-top container-image" alt="wi-fi">
+        <div class="card-body">
+          <h5 class="card-title">Free Wi-fi</h5>
+          <p class="card-text">Bharat Railway has provided free WiFi at 500 stations across the country to help you feel
+            connected while traveling. Our mission is to provide WiFi at all railway stations at the highest speed
+            possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<!-- <div class="modal-header">
+  <h4 class="modal-title">Notice!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+   Hon'ble Prime Minister message on "Public Health Response to COVID-19: Campaign for COVID-Appropriate Behaviour".
+    Wear Mask, Follow Physical Distancing, Maintain Hand Hygine.
+
+    COVID 19 Alert:
+     
+    <ul>
+      <li> All passengers are hereby informed that downloading of Aarogya Setu App on their mobile phone, that they are
+    carrying along, is advisable.</li>
+
+    <li>Catering Service is not available and catering charges not included in the fare.</li>
+
+    <li>No blanket and linen shall be provided in the train.</li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div> -->

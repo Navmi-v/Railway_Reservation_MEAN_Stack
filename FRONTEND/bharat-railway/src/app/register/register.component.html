@@ -1,0 +1,100 @@
+
+<div class="container pt-3">
+    <div  class="alert alert-success"><h3>Individual Registration</h3></div>
+    <hr>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <p>GARBAGE/JUNK VALUES IN PROFILE MAY LEAD TO DEACTIVATION <br>
+        Please use a valid E-Mail ID and mobile number in registration.</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <form [formGroup]='registrationForm' (ngSubmit)="onSubmit()" >
+  
+      <div class="form-group">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" [class.is-invalid]="username.invalid && username.touched" class="form-control " formControlName="username" placeholder="Username">
+        <div *ngIf="username.invalid && username.touched">
+          <small *ngIf="username.errors?.required" class="text-danger">Username is required</small>
+          <small *ngIf="username.errors?.minlength" class="text-danger">Username must be at least 5 characters long</small>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" class="form-control" formControlName="password" placeholder="Password">
+       
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm password:</label>
+        <input type="password" [class.is-invalid]="registrationForm.errors?.misMatch" class="form-control" formControlName="confirmPassword" placeholder="Confirm password">
+        <small *ngIf="registrationForm.errors?.misMatch" calss="text-danger">Passwords do not match</small>
+      </div>
+      <hr>
+      
+      <div  class="alert alert-success"><h3>Personal Details</h3></div>
+      <hr>
+  
+      <div class="mb-3">
+        <label for="name" class="form-label">Full name</label>
+        <input type="text" class="form-control" [class.is-invalid]="name.invalid && name.touched" formControlName="name" placeholder="Enter full name as per identity">
+        <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
+      </div>
+  
+      <div class="mb-3">
+        <label>Gender:</label>
+        <div class="form-check">
+          <input type="radio" class="form-check-input"  id="male" name="gender" formControlName="gender" value="male">
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="female" name="gender" formControlName="gender" value="female">
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="transgender" name="gender" formControlName="gender" value="transgender">
+          <label class="form-check-label" for="transgender">Transgender</label>
+        </div>      
+      </div>
+  
+      <div class="mb-3">
+        <label for="age" class="form-label">Age:</label>
+        <input type="number" class="form-control" [class.is-invalid]="age.invalid && age.touched" formControlName="age" >
+        <div *ngIf="age.invalid && age.touched">
+          <small *ngIf="age.errors?.required" class="text-danger">Age is required.</small>
+          <small *ngIf="age.errors?.min" class="text-danger">The person must be atleast 18 years old</small>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="country" class="form-label">Country:</label>
+        <input type="text" class="form-control" formControlName="country" [class.is-invalid]="country.invalid && country.touched" placeholder="Country">
+        <small [class.d-none]="country.valid || country.untouched" class="text-danger">Country is required</small>
+      </div>
+  
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" class="form-control" formControlName="email" [class.is-invalid]="email.invalid && email.touched" placeholder="name@example.com">
+        <!-- <small [class.d-none]="email.valid || email.untouched" class="text-danger">E-mail is required and must be valid</small> -->
+        <div *ngIf="email.invalid && email.touched">
+          <small *ngIf="email.errors?.required" class="text-danger">E-mail is required.</small>
+          <small *ngIf="email.errors?.email" class="text-danger">Please enter a valid e-mail</small>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="contact" class="form-label">Contact Number:</label>
+        <input type="tel" class="form-control" formControlName="contact" [class.is-invalid]="contact.invalid && contact.touched" placeholder="Contact Number">
+        <small [class.d-none]="contact.valid || contact.untouched" class="text-danger">Mobile number is required and must be of 10 digits</small>
+      </div>
+  
+      <div class="form-check mb-3">
+        <label class="form-check-label"> By clicking on register, you have accepted to our <a href="https://www.business-standard.com/terms-conditions">Terms and Conditions</a> and also agreed to receive promotional emails and SMS.</label>
+      </div> 
+  
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary " (click)="onSubmit()" [disabled]="!registrationForm.valid" >REGISTER</button>
+      </div>
+  
+    </form>
+  </div> 
+
+  

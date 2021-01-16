@@ -1,0 +1,47 @@
+.bg-image {
+    position: relative;
+    min-width: 100%;
+    height: 600px;
+    top: 0;
+    left: 0;
+    background-image: url("../../assets/bg.jpeg");
+    background-size: cover;
+    background-repeat: no repeat;
+}
+
+
+.center{
+    align-items: center;
+    margin: auto;
+}
+
+.heading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    font-size: large;
+}
+
+.space{
+    padding-top: 3rem ;
+    padding-bottom: 3rem;
+}
+
+.extra-margin{
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.container-image{
+    height: 6 rem;
+
+}
+
+.image-align{
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
